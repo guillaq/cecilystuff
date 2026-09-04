@@ -22,9 +22,12 @@ uv run pre-commit install   # runs the checks automatically on every commit
 You never need to activate the virtualenv. Prefix commands with `uv run`:
 
 ```bash
-uv run python processing/my_tool/run.py
+uv run python -m processing.my_tool.run
 uv run pytest
 ```
+
+Tools are Python packages, so they are run with `-m` and import each other's modules with
+`from processing.my_tool import ...`.
 
 ## Adding a dependency
 
@@ -61,9 +64,10 @@ If pre-commit blocks a commit, it has usually already fixed the problem. Look at
 ```
 processing/<tool_name>/
     README.md      # specs first, then how the code was validated
+    __init__.py
     <code>.py
     test_<tool_name>_*.py
 ```
 
-Test files need unique names across the repo (hence the `test_<tool_name>_` prefix), because
-pytest imports them by filename.
+Test files keep the `test_<tool_name>_` prefix so they stay easy to run as a group and
+easy to tell apart in a failure report.
