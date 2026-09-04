@@ -1,0 +1,46 @@
+[project]
+name = "cecilystuff"
+version = "0.1.0"
+description = "Data processing and simulation tools"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pyright>=1.1.400",
+    "ruff>=0.14",
+    "pre-commit>=4.0",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes: undefined names, unused imports
+    "W",    # whitespace
+    "I",    # import sorting
+    "UP",   # outdated syntax
+    "B",    # bugbear: likely bugs
+    "SIM",  # simplifications
+    "NPY",  # numpy-specific
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "E501",  # line length is handled by the formatter
+]
+
+[tool.pyright]
+include = ["processing"]
+pythonVersion = "3.13"
+typeCheckingMode = "standard"
+reportUnusedImport = "error"
+reportUnusedVariable = "error"
+reportUnnecessaryComparison = "error"
+reportUnnecessaryIsInstance = "error"
+
+[tool.pytest.ini_options]
+testpaths = ["processing"]
+addopts = "-q"
